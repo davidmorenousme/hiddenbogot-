@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+    <div>
+        <h1>Descubre lo que no todos conocen</h1>
+        <p>Cafeterías, restaurantes y experiencias auténticas de Bogotá, recomendadas para viajeros como tú y vividas como un local.</p>
+        <div class="hero-buttons">
+            <a href="{{ url_for('login_turista') }}" class="btn btn-primary">Explorar lugares</a>
+            <a href="{{ url_for('login_comercio') }}" class="btn btn-outline">Soy un comercio</a>
+        </div>
+    </div>
+    <div class="hero-img">
+        <img src="{{ url_for('static', filename='img/logo.jpeg') }}" alt="Hidden Bogotá">
+    </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section class="section">
+    <div class="cards">
+        <div class="card">
+            <div class="icon">🌎</div>
+            <h3>Para extranjeros</h3>
+            <p>Recomendaciones auténticas en inglés y español.</p>
+        </div>
+        <div class="card">
+            <div class="icon">🏪</div>
+            <h3>Comercios locales</h3>
+            <p>Apoya lo local y descubre joyas escondidas.</p>
+        </div>
+        <div class="card">
+            <div class="icon">⭐</div>
+            <h3>Experiencias únicas</h3>
+            <p>Vive Bogotá como un local, no como turista.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section class="pasos" id="como-funciona">
+    <div class="section">
+        <h2 class="section-title">¿Cómo funciona?</h2>
+        <div class="cards">
+            <div class="card">
+                <div class="paso-num">1</div>
+                <h3>Crea tu cuenta</h3>
+                <p>Regístrate como turista en un minuto.</p>
+            </div>
+            <div class="card">
+                <div class="paso-num">2</div>
+                <h3>Descubre lugares</h3>
+                <p>Explora cafeterías y planes auténticos cerca de ti.</p>
+            </div>
+            <div class="card">
+                <div class="paso-num">3</div>
+                <h3>Vive y reseña</h3>
+                <p>Visita, guarda tus favoritos y comparte tu experiencia.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LUGAR DESTACADO (viene de la base de datos) -->
+{% if destacado %}
+<section class="section" id="destacado">
+    <h2 class="section-title">Lugar destacado</h2>
+    <div class="destacado">
+        <div class="destacado-img">🧸☕</div>
+        <div class="destacado-info">
+            <span class="tag">{{ destacado.categoria }}</span>
+            <h3>{{ destacado.nombre }}</h3>
+            <p>{{ destacado.descripcion }}</p>
+            <p class="dato">📍 {{ destacado.direccion }}</p>
+            <p class="dato">🕒 {{ destacado.horario }}</p>
+            <br>
+            <a href="{{ url_for('login_turista') }}" class="btn btn-primary">Ver más</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% endblock %}

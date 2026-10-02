@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Iniciar sesión — Hidden Bogotá{% endblock %}
+
+{% block content %}
+<section class="section" style="max-width: 440px; margin: 0 auto;">
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash">
+                {% for msg in messages %}
+                    <p>{{ msg }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="auth-tabs">
+        <button class="tab-btn active" onclick="mostrarTab('login')">Iniciar sesión</button>
+        <button class="tab-btn" onclick="mostrarTab('registro')">Registrarme</button>
+    </div>
+
+    <!-- FORMULARIO LOGIN -->
+    <form id="tab-login" class="auth-form" method="POST" action="{{ url_for('login_turista') }}">
+        <h2>Bienvenido de nuevo</h2>
+        <label>Correo electrónico</label>
+        <input type="email" name="email" required placeholder="tu@correo.com">
+
+        <label>Contraseña</label>
+        <input type="password" name="password" required placeholder="••••••••">
+
+        <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+    </form>
+
+    <!-- FORMULARIO REGISTRO -->
+    <form id="tab-registro" class="auth-form" method="POST" action="{{ url_for('registro_turista') }}" style="display:none;">
+        <h2>Crea tu cuenta</h2>
+        <label>Nombre completo</label>
+        <input type="text" name="nombre" required placeholder="María López">
+
+        <label>Correo electrónico</label>
+        <input type="email" name="email" required placeholder="tu@correo.com">
+
+        <label>Contraseña</label>
+        <input type="password" name="password" required placeholder="••••••••">
+
+        <label>País de origen</label>
+        <input type="text" name="pais_origen" placeholder="Estados Unidos">
+
+        <button type="submit" class="btn btn-primary btn-block">Registrarme</button>
+    </form>
+
+</section>
+
+<script>
+function mostrarTab(tab) {
+    document.getElementById('tab-login').style.display = tab === 'login' ? 'block' : 'none';
+    document.getElementById('tab-registro').style.display = tab === 'registro' ? 'block' : 'none';
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+{% endblock %}
